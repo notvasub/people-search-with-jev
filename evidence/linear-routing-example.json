@@ -1,0 +1,86 @@
+{
+  "description": "One recorded company-research routing example used to inform a future public professional people-search implementation; not a people-search evaluation.",
+  "capture_id": "3f2e8562-1dae-4f64-8eda-b75364eff640",
+  "captured_at": "2026-09-25T07:51:40.322Z",
+  "shared_plan": {
+    "model_calls": 1,
+    "elapsed_ms": 13590,
+    "known_cost_usd": 0.007372
+  },
+  "models": {
+    "generative": "openai/gpt-6-sol",
+    "jev_requested": "typesafe/jev-1.13",
+    "jev_returned": "typesafe/jev-1.13-20260917"
+  },
+  "lanes": {
+    "standard": {
+      "retrieval_calls": 18,
+      "jev_calls": 0,
+      "other_model_calls": 5,
+      "all_provider_calls": 23,
+      "elapsed_ms": 74407,
+      "known_cost_usd": 0.09153499999999999,
+      "supported_findings": [
+        "Linear publicly documents a GraphQL API for querying and mutating data.",
+        "Linear documents OAuth 2.0 and personal API keys as ways to authenticate requests to its API.",
+        "Linear’s own documentation identifies GitHub-linked issue automation as a product feature."
+      ]
+    },
+    "jev_guided": {
+      "retrieval_calls": 10,
+      "jev_calls": 3,
+      "other_model_calls": 2,
+      "all_provider_calls": 15,
+      "elapsed_ms": 63106,
+      "known_cost_usd": 0.058690375999999995,
+      "supported_findings": [
+        "In its May 23, 2024 account of multi-region support, Linear describes replicated regional production deployments, each operating against a single database instance, rather than a sharded database.",
+        "Linear’s May 23, 2024 engineering post identifies Cloudflare Workers as the request-routing proxy for its multi-region deployment, with a stated authentication and regional-forwarding role.",
+        "Linear’s developer documentation identifies a public GraphQL API for queries and mutations and documents OAuth 2.0 and personal API keys for API authentication."
+      ]
+    }
+  },
+  "first_jev_decision": {
+    "candidate_count": 6,
+    "selected_count": 3,
+    "candidates": [
+      {
+        "title": "Linear - The system for product development",
+        "url": "https://linear.app/",
+        "selected": false,
+        "relevance": "unrelated"
+      },
+      {
+        "title": "Linear Developers",
+        "url": "https://linear.app/developers",
+        "selected": true,
+        "relevance": "indirect"
+      },
+      {
+        "title": "How we built multi-region support for Linear",
+        "url": "https://linear.app/now/how-we-built-multi-region-support-for-linear",
+        "selected": true,
+        "relevance": "direct"
+      },
+      {
+        "title": "How to Build an App Like Linear: Architecture, Stack, and Tradeoffs ...",
+        "url": "https://howworks.ai/blog/how-to-build-an-app-like-linear",
+        "selected": false,
+        "relevance": "indirect"
+      },
+      {
+        "title": "The 5 Frontend Architectures You Must Know in 2025",
+        "url": "https://feature-sliced.design/blog/frontend-architecture-guide",
+        "selected": false,
+        "relevance": "indirect"
+      },
+      {
+        "title": "How Linear Achieves Blazing Speed: A Technical Breakdown",
+        "url": "https://leafdraft.com/blog/how-linear-achieves-blazing-speed-a-technical-breakdown",
+        "selected": true,
+        "relevance": "direct"
+      }
+    ]
+  },
+  "caveat": "Descriptive single capture. Spend is known provider cost, not total cost. No human answer-comparability review was recorded."
+}
