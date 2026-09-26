@@ -1,0 +1,8 @@
+{
+  "query": "Find Morgan Lee, an engineering leader at a Boston robotics company",
+  "results": [
+    { "title": "Morgan Lee — Speaker profile", "url": "https://example.org/events/morgan-lee", "text": "Morgan Lee spoke about distributed systems in 2021." },
+    { "title": "Morgan Lee — Robotics engineering", "url": "https://example.com/team/morgan-lee", "text": "Morgan Lee leads robotics engineering at a Boston-based company. This is a fictional demo result." },
+    { "title": "Morgan Lee — Design portfolio", "url": "https://example.net/morgan-lee", "text": "Morgan Lee is a designer in Seattle. This is a fictional demo result." }
+  ]
+}

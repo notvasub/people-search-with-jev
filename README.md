@@ -2,9 +2,24 @@
 
 [Read the short writeup](https://notvasub.github.io/people-search-with-jev/)
 
-**An implementation blueprint for source-backed search over public professional profiles.** Jev is the routing layer: it judges which candidate search or page-read action is likely to resolve an identity or add new evidence. Ordinary code performs the search, fetches pages, checks citations, and decides when to stop.
+**A runnable candidate-routing prototype and implementation blueprint for source-backed search over public professional profiles.** Exa supplies public people-search results; Jev chooses which result is worth reading first. A standard route uses provider order for comparison.
 
-This repository contains the design, a small recorded routing trace, and a [24-second experiment video](assets/routing-experiment.mp4). It does **not** yet contain a working people-search service or a people-search benchmark. The recorded trace came from a public company-technology research task; it demonstrates the routing mechanism and motivates the next experiment without claiming that its results transfer to people search.
+This repository contains the CLI prototype, design, a small recorded routing trace, and a [24-second experiment video](assets/routing-experiment.mp4). The recorded trace came from a public company-technology research task; it demonstrates the routing mechanism without claiming that its results transfer to people search.
+
+## Run it
+
+Use Node 22.18 or newer. No package install is needed.
+
+```bash
+cp .env.example .env
+# Add OPENROUTER_API_KEY to .env for Jev mode.
+# Add EXA_API_KEY to .env for a live people search.
+node --env-file=.env --experimental-strip-types src/cli.ts --sample --mode jev
+node --env-file=.env --experimental-strip-types src/cli.ts --query "engineering leader at a Boston robotics company" --mode jev
+npm test
+```
+
+`--sample` uses fictional result snippets, so it needs only the OpenRouter key in Jev mode. `--mode standard` uses the first provider result and needs no OpenRouter key. The CLI outputs the candidate order, chosen source, serving Jev model, and reported usage. If Jev fails or returns an invalid option, it records the reason and falls back to provider order. Live search needs an Exa key. **This is source selection, not a verified person match**: the CLI does not yet fetch pages or assert identity facts.
 
 ![Routing experiment results](assets/routing-experiment-cover.png)
 
@@ -85,15 +100,15 @@ Store snapshots and append-only events so the UI can replay what happened. Deriv
 7. Resolve identity only with enough independent signals (for example name plus organization and role or a direct cross-link). Conflicts reopen the question. An unresolved candidate stays visible as such.
 8. Stop on resolved questions, exhausted eligible actions, a request budget, a deadline, or cancellation. Persist every dispatched attempt and accepted source even if work stops early.
 
-### Suggested first build
+### Next build milestones
 
 Use TypeScript and a small Node worker. A web UI can submit work and replay events, while the worker owns the bounded loop. SQLite is sufficient for a single-host prototype. Keep `OPENROUTER_API_KEY` and any `EXA_API_KEY` on the server. A `.env.example` should contain variable names and empty values only. The implementation can start with a CLI and add the UI after the trace is correct.
 
 | Milestone | Build | Acceptance check |
 | --- | --- | --- |
 | 1. Typed core | Request, person, source, claim, action, decision, attempt schemas; budgets and event log | Invalid provider or model output cannot enter stored state |
-| 2. Standard route | Public search, guarded page fetch, identity evidence, deterministic provider-order baseline | One named-person query returns citations and unresolved conflicts |
-| 3. Jev route | OpenRouter Decisions adapter, six-option shortlist, model pinning, fallback, stored probabilities | Fixture proves Jev changes an eligible next action; failures use the fallback |
+| 2. Source reading | Guarded public page fetch, identity evidence, and exact excerpts | One named-person query returns citations and unresolved conflicts |
+| 3. Jev expansion | Route later search and page-read actions, store probabilities and full trace | Jev changes eligible actions across multiple waves; failures use the fallback |
 | 4. Paired runner | Shared immutable query plan, independent lane caches, alternating execution order, exact usage accounting | Both routes are replayable and totals reconcile with attempts |
 | 5. Inspection UI | Search form, candidate cards, source excerpts, live action graph, Jev decision replay | A reviewer can follow a claim back to the exact page excerpt |
 | 6. Evaluation | Opt-in public-professional test set, human identity judgments, repeated paired runs | Report identity precision/recall, citation validity, coverage, latency, and known cost together |
@@ -110,7 +125,11 @@ Restrict collection to public professional information relevant to the query. Re
 ## Repository contents
 
 - [`evidence/linear-routing-example.json`](evidence/linear-routing-example.json): sanitized metrics, supported findings, and the first six-option Jev choice from one real routing capture.
+- [`src/search.ts`](src/search.ts): Exa search adapter, safe public-result normalization, Jev decision call, and deterministic fallback.
+- [`src/cli.ts`](src/cli.ts): runnable command-line entry point.
+- [`examples/sample-results.json`](examples/sample-results.json): fictional sample candidates for a cheap Jev smoke test.
+- [`test/search.test.ts`](test/search.test.ts): routing and validation tests.
 - [`assets/routing-experiment.mp4`](assets/routing-experiment.mp4): 24-second Autumn AI experiment cut.
 - [`assets/routing-experiment-cover.png`](assets/routing-experiment-cover.png): video cover.
 
-There is no runnable people-search implementation in this repository yet. The first coding milestone is the typed core and CLI above. The video and trace are evidence of the routing experiment, not people-search performance data.
+The video and trace are evidence of the earlier routing experiment, not people-search performance data.
