@@ -1,0 +1,61 @@
+:root {
+  color-scheme: light;
+  background: #f8f7f3;
+  color: #242822;
+  font-family: Georgia, "Iowan Old Style", "Baskerville", serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+* { box-sizing: border-box; }
+
+body { margin: 0; min-width: 320px; }
+
+main { display: flex; justify-content: center; padding: 162px 24px 138px; }
+
+article { width: min(100%, 720px); }
+
+h1 {
+  margin: 0 0 62px;
+  font-size: clamp(3.4rem, 6vw, 5.7rem);
+  line-height: 0.99;
+  letter-spacing: -0.055em;
+  font-weight: 400;
+  text-align: center;
+}
+
+p {
+  margin: 0 0 1.45em;
+  font-size: clamp(1.12rem, 1.7vw, 1.32rem);
+  line-height: 1.72;
+  letter-spacing: -0.012em;
+}
+
+p:last-child { margin-bottom: 0; }
+strong { font-weight: 700; }
+a { color: inherit; text-decoration-color: #9da99a; text-underline-offset: 3px; }
+a:hover { text-decoration-color: currentColor; }
+
+.copy-markdown {
+  position: absolute;
+  top: 30px;
+  right: 35px;
+  padding: 11px 15px;
+  border: 1px solid #cbd0c6;
+  border-radius: 4px;
+  background: transparent;
+  color: #3c443a;
+  font: 600 0.78rem/1.1 system-ui, -apple-system, sans-serif;
+  letter-spacing: 0.015em;
+  cursor: pointer;
+}
+
+.copy-markdown:hover { border-color: #657262; background: #eeefe8; }
+.copy-markdown:focus-visible { outline: 2px solid #445a45; outline-offset: 3px; }
+
+@media (max-width: 640px) {
+  main { padding: 137px 24px 94px; }
+  h1 { margin-bottom: 43px; }
+  .copy-markdown { top: 24px; right: 24px; padding: 10px 12px; }
+}

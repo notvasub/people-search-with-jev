@@ -1,5 +1,7 @@
 # People Search with Jev
 
+[Read the short writeup](https://notvasub.github.io/people-search-with-jev/)
+
 **An implementation blueprint for source-backed search over public professional profiles.** Jev is the routing layer: it judges which candidate search or page-read action is likely to resolve an identity or add new evidence. Ordinary code performs the search, fetches pages, checks citations, and decides when to stop.
 
 This repository contains the design, a small recorded routing trace, and a [24-second experiment video](assets/routing-experiment.mp4). It does **not** yet contain a working people-search service or a people-search benchmark. The recorded trace came from a public company-technology research task; it demonstrates the routing mechanism and motivates the next experiment without claiming that its results transfer to people search.

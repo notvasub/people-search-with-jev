@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f8f7f3" />
+    <meta name="description" content="A short writeup on Jev-guided research routing and its next application in people search." />
+    <title>People Search with Jev</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <button id="copy-markdown" class="copy-markdown" type="button" aria-label="Copy writeup as Markdown for your agent">Copy Markdown for your agent</button>
+    <main>
+      <article>
+        <h1>People Search with Jev</h1>
+        <p>A search engine gives you possible sources. It does not tell you which one is worth reading next. That decision is the heart of this experiment: put TypeSafe’s Jev between discovery and retrieval, let it judge a small set of candidate actions, and keep the research workflow itself in ordinary code.</p>
+        <p>We tested the idea on a public research question about Linear’s technology stack. Both routes started from the same plan and used the same rules for reading pages and supporting claims. The standard route followed provider order. The Jev-guided route asked which action was relevant and likely to add new evidence.</p>
+        <p>In the recorded run, the Jev-guided route made <strong>10 retrieval calls instead of 18</strong>, and <strong>15 total provider calls instead of 23</strong>. It took <strong>63.1 seconds instead of 74.4</strong>. Known provider spend was <strong>$0.0587 instead of $0.0915</strong>. Both routes surfaced <strong>three supported findings</strong>.</p>
+        <p>The most revealing moment was a choice among six possible links. Jev selected three, including <a href="https://linear.app/developers">Linear’s developer documentation</a> and its own <a href="https://linear.app/now/how-we-built-multi-region-support-for-linear">engineering post about multi-region support</a>. The resulting research surfaced Linear’s description of <strong>Cloudflare Workers routing requests across regional deployments</strong>. This was a more specific infrastructure finding than a generic list of technologies: it connected a named system to a stated production role and a first-party source.</p>
+        <p>That is the novelty. Jev did not write the answer, fetch the page, or declare a claim true. It changed <strong>where the researcher looked next</strong>. Each choice can be replayed: the candidate list, the selected links, the model’s judgment, and the evidence that followed are visible. The result is an inspectable research path rather than an unexplained list of search results.</p>
+        <p>People search is a natural next application. A name, role, and company can produce several plausible profiles. The useful next move may be an employer page, a conference bio, a professional profile, or a query that separates two people with the same name. Jev can help choose that move while the system keeps identity checks, source citations, and uncertainty explicit. The aim is simple: <strong>spend research effort on the next source most likely to resolve the question.</strong></p>
+      </article>
+    </main>
+    <script src="script.js" defer></script>
+  </body>
+</html>
